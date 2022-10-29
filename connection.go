@@ -25,7 +25,7 @@ type connection struct {
 
 func (c *connection) consumeRequests() error {
 	for {
-		req, err := c.readTimeout(time.Hour)
+		req, err := c.readTimeout(2 * time.Hour)
 		if err != nil {
 			return err
 		}
