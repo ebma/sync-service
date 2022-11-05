@@ -144,10 +144,13 @@ func (c *connection) consumeResponses() error {
 
 func (c *connection) readTimeout(timeout time.Duration) (*Request, error) {
 	ctx, cancel := context.WithTimeout(c.ctx, timeout)
+
+	logging.S().Infow("reading request", "timeout", timeout)
 	defer cancel()
 
 	var req *Request
 	err := wsjson.Read(ctx, c.Conn, &req)
+	logging.S().Infow("read request", "err", err)
 	return req, err
 }
 
